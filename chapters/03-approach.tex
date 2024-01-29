@@ -1,32 +1,77 @@
 \chapter{Approach}
 \label{ch:approach}
 
-\instructions{Page budget for Approach: 20-30 pages
-%
-\begin{itemize}
-    \item This chapter describes your main contributions (i.e., what you did) and the decisions that went into them (i.e., why did you did it the way you did it).
-    \item Alternative headings may be used depending on the kind of contribution(s) you make.
-\end{itemize}
-}
+% \instructions{Page budget for Approach: 20-30 pages
+% %
+% \begin{itemize}
+%     \item This chapter describes your main contributions (i.e., what you did) and the decisions that went into them (i.e., why did you did it the way you did it).
+%     \item Alternative headings may be used depending on the kind of contribution(s) you make.
+% \end{itemize}
+% }
 
 \section{Overview}
+% \instructions{
+% \begin{itemize}
+%     \item This section should explain the high-level design
+%     \item Include possibly an architecture figure that shows how the different parts fit together and what processing/technology/tools/datasets have been used for the different components.
+% \end{itemize}
+% %
+% Name these themes based on the different components or sub-problems you are solving in your thesis.
+% }
 
-\instructions{
-\begin{itemize}
-    \item This section should explain the high-level design
-    \item Include possibly an architecture figure that shows how the different parts fit together and what processing/technology/tools/datasets have been used for the different components.
-\end{itemize}
-%
-Name these themes based on the different components or sub-problems you are solving in your thesis.
-}
-    
-\section{Theme 1}
-\section{Theme 2}
+The Automatic Generation of Presentations for Research Papers (AGPRP) is a system for generating presentations in \LaTeX{} Beamer format from academic research papers. It is composed of three main components: a report parser, a presentation generator and a presentation compiler. The report parser is responsible for extracting the relevant information from the report, the presentation generator is responsible for generating the presentation and the presentation compiler is responsible for compiling the presentation into a \LaTeX{} Beamer file. The system is designed to be modular, so that each component can be replaced with a different implementation. This allows for easy extension of the system, as well as for easy testing of different approaches.
 
-\instructions{
+\section{Dataset}
+
+\subsection{Data Collection}
+\begin{table}
+    \centering
+    \begin{tabulary}{\linewidth}{c|C|C|C|c}
+        \hline
+        \textbf{Source} & \textbf{Number of Report/Presentation Pairs} & \textbf{Reports Format} & \textbf{Presentations Format} & \textbf{Size} \\
+        \hline
+        \citet{Fu:2022:AAAI} & 6588 & PDF & JPEG & 33.8 GB \\
+        \citet{Sefid:2019:K-CAP} & 5000 & PDF & PDF & 16 GB \\
+        \hline
+    \end{tabulary}
+    \caption{The number of papers and presentations in the dataset.}
+    \label{tab:dataset}
+\end{table}
+\subsection{Data Preprocessing}
+If we need to work with PDF formats, there will be a need to convert them to \LaTeX{} format before we can train our model on the dataset. There are several tools that may be able to convert PDF files into text or \LaTeX{} format: 
+
 \begin{itemize}
-    \item For larger/more complex projects, the separate themes may be chapters on their own (e.g., components in a system; sub-problems of a major evaluation study; etc.).
-    \item Include screenshots, examples, tables, algorithms (with pseudo code), plots for some preliminary observations leading to some aspect of your approach decisions, etc. so that it's not just text.
-    \item Always discuss the alternatives considered and the rationale for the choosing the solutions you adopted.
+    \item \textbf{PDFMiner}\footnote{\url{https://pypi.org/project/pdfminer/}} - PDFMiner is a tool for extracting information from PDF documents. Unlike other PDF-related tools, it focuses entirely on getting and analyzing text data. PDFMiner allows one to obtain the exact location of text in a page, as well as other information such as fonts or lines. It includes a PDF converter that can transform PDF files into other text formats (such as HTML). It has an extensible PDF parser that can be used for other purposes than text analysis.
+    \item \textbf{pdftolatex}\footnote{\url{https://github.com/vinaykanigicherla/pdftolatex}} - ''Python tool for generation of \LaTeX{} code from PDF files.''
+    \item \textbf{pdf2latex-converter}\footnote{\url{https://github.com/mcpeixoto/pdf2latex-converter}} - ''Originally based on \textbf{pdftolatex}.'' (Work in progress).
+    \item \textbf{pdf2latex}\footnote{\url{https://github.com/emsquid/pdf2latex}} - ''pdf2latex is a CLI tool to convert a PDF back to LaTeX.''
+    \item \textbf{pdf2latex}\footnote{\url{https://github.com/safnuk/pdf2latex}} - ''Train a neural network to produce latex source code which generates a given pdf file.''
+    \item \textbf{PDF2LaTeX}\footnote{\url{https://github.com/senyalin/PDF2LaTeX}} - PDF2LaTeX is a tool for converting PDF files into \LaTeX{} format. It is a command-line tool that can be used to convert PDF files into \LaTeX{} format. It is written in Python and uses the PyPDF2 library to parse PDF files. It can be used to convert PDF files into \LaTeX{} format.
+    \item \textbf{pypdf}\footnote{\url{https://pypi.org/project/pypdf/}} - pypdf is a Python library for working with PDF files. It can be used to extract text from PDF files, as well as to convert PDF files into other formats (such as HTML).
+    \item \textbf{pdfly}\footnote{\url{https://github.com/py-pdf/pdfly}} - ''CLI tool to extract (meta)data from PDF and manipulate PDF files.''
 \end{itemize}
-}
+
+\subsection{Data Augmentation}
+It may be useful to enrich the dataset with details such as internal and external references, and tables and illustations. This can help when generating the presentation, as it can be used to determine which additional items to include together with the text.
+
+\section{Method}
+
+\subsection{Report Parser (RP)}
+The \emph{Report Parser (RP)} is responsible for extracting the relevant information from the report. The report parser is composed of two main components: the \emph{Report Content Extractor (RCE)} and the \emph{Report Content Summarizer (RCS)}. The \emph{Report Content Extractor} is responsible for extracting the relevant information from the report, while the \emph{Report Content Summarizer} is responsible for summarizing the extracted information.
+
+\subsection{Presentation Content Generator}
+The \emph{Presentation Content Generator (PCG)} is responsible for 
+Presentations can be generated in a wide range of variations in layout, content and style. 
+
+\subsection{Presentation Slides Generator}
+There are several options when it comes to generating visual layout and content for the presentation slides. 
+
+
+% \instructions{
+% \begin{itemize}
+%     \item For larger/more complex projects, the separate themes may be chapters on their own (e.g., components in a system; sub-problems of a major evaluation study; etc.).
+%     \item Include screenshots, examples, tables, algorithms (with pseudo code), plots for some preliminary observations leading to some aspect of your approach decisions, etc. so that it's not just text.
+%     \item Always discuss the alternatives considered and the rationale for the choosing the solutions you adopted.
+% \end{itemize}
+% }
+% %

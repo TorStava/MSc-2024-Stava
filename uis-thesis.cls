@@ -220,8 +220,8 @@
       \bigskip
       \bigskip 
       {\large Internal Supervisors \par}
-      {\LARGE Supervisor 1 \par}
-      {\LARGE Supervisor 2 \par}
+      {\LARGE Krisztian Balog \par}
+      {\LARGE Petra Galuscakova \par}
       
        \bigskip
       \bigskip

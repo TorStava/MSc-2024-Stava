@@ -26,6 +26,7 @@
 \usepackage[compact]{titlesec}
 \usepackage{booktabs}
 \usepackage{sectsty}     % section titles in specified font face
+\usepackage{tabulary}
 
 \allsectionsfont{\sffamily}
 \numberwithin{algorithm}{chapter}
@@ -52,8 +53,8 @@
 \includepdf[offset=25mm -25mm, scale=1]{./frontpage-masters.pdf}
 
 
-\title{Thesis Title}
-\authors{FirstName LastName and\\ AnotherName WithLastName}
+\title{Automatic Generation of Presentations for Research Papers}
+\authors{Tor Olav Stava}
 \addresses{\groupname\\\deptname\\\univname}  % Do not change this here, instead these must be set in the "Thesis.cls" file, please look through it instead
 \date       {\today}
 \subject    {}
@@ -107,13 +108,13 @@
 %% ----------------------------------------------------------------
 % Now begin the Appendices, including them as separate files
 
-\addtocontents{toc}{\vspace{2em}} % Add a gap in the Contents, for aesthetics
+% \addtocontents{toc}{\vspace{2em}} % Add a gap in the Contents, for aesthetics
 
-\appendix % Cue to tell LaTeX that the following 'chapters' are Appendices
-\input{appendices/appendix}
-\input{appendices/instructions}
+% \appendix % Cue to tell LaTeX that the following 'chapters' are Appendices
+% \input{appendices/appendix}
+% \input{appendices/instructions}
 
-\addtocontents{toc}{\vspace{2em}}  % Add a gap in the Contents, for aesthetics
+% \addtocontents{toc}{\vspace{2em}}  % Add a gap in the Contents, for aesthetics
 \backmatter
 
 %% ----------------------------------------------------------------
