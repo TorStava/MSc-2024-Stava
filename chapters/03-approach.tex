@@ -21,22 +21,20 @@
 
 The Automatic Generation of Presentations for Research Papers (AGPRP) is a system for generating presentations in \LaTeX{} Beamer format from academic research papers. It is composed of three main components: a report parser, a presentation generator and a presentation compiler. The report parser is responsible for extracting the relevant information from the report, the presentation generator is responsible for generating the presentation and the presentation compiler is responsible for compiling the presentation into a \LaTeX{} Beamer file. The system is designed to be modular, so that each component can be replaced with a different implementation. This allows for easy extension of the system, as well as for easy testing of different approaches.
 
+%
+\subsection{NOTES (Section to be deleted)}
+\begin{itemize}
+    \item Could it be beneficial to use a knowledge graph to represent the information in the report? This could be used to generate the presentation, as well as to provide a visual representation of the information in the report.
+    \item Summarizing vs extracting information from the report. How do we decide the best approach?
+    \item Should we test various models, e.g. HuggingFace transformers vs ChatGPT?
+    \item Testing how well already existing models (e.g. ChatGPT, MS Copilot) perform when asked to generate a presentation from a research paper.
+    \item When using \LaTeX{} as source file, how do we identify the main file? Where do we start parsing? 
+\end{itemize}
+
 \section{Dataset}
 
 \subsection{Data Collection}
-\begin{table}
-    \centering
-    \begin{tabulary}{\linewidth}{c|C|C|C|c}
-        \hline
-        \textbf{Source} & \textbf{Number of Report/Presentation Pairs} & \textbf{Reports Format} & \textbf{Presentations Format} & \textbf{Size} \\
-        \hline
-        \citet{Fu:2022:AAAI} & 6588 & PDF & JPEG & 33.8 GB \\
-        \citet{Sefid:2019:K-CAP} & 5000 & PDF & PDF & 16 GB \\
-        \hline
-    \end{tabulary}
-    \caption{The number of papers and presentations in the dataset.}
-    \label{tab:dataset}
-\end{table}
+
 \subsection{Data Preprocessing}
 If we need to work with PDF formats, there will be a need to convert them to \LaTeX{} format before we can train our model on the dataset. There are several tools that may be able to convert PDF files into text or \LaTeX{} format: 
 

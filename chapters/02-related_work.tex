@@ -20,10 +20,67 @@
 % \end{itemize}
 % }
 
-\textbf{Automatic slide generation of scientific papers}\citep{Sefid:2019:K-CAP}
+\section{Automatic slide generation of scientific papers}
 
-\textbf{ArXiv Table Extractor}\citep{Ramsay:2021:BachelorThesis}
+\citet{Sefid:2019:K-CAP} presents a novel approach to automatically generate presentation slides from scientific papers, addressing the time-consuming process of slide preparation for researchers. The paper outlines the challenges of summarization, distinguishing between abstractive and extractive methods, and focuses on the latter due to its grammatical correctness and consistency with the original document. The main contributions include the use of deep neural models for sentence encoding within the context of sentence ranking for slide generation and the combination of regression with integer linear programming (ILP) for selecting salient sentences to create bullet points.
 
-\textbf{DOC2PPT: Automatic Presentation Slides Generation from Scientific Documents}\citep{Fu:2022:AAAI}
+The paper reviews related work in text summarization, highlighting the gap in research regarding automatic slide generation. It then details the proposed model, which trains on a dataset of paper-slide pairs to score sentences for importance using convolutional neural networks (CNN), gated recurrent units (GRU), and long short-term memory (LSTM) networks, along with pre-trained word embeddings. This model also incorporates surface features of sentences, such as section placement and sentence length, to aid in scoring.
 
-\textbf{PDF2LaTeX: A Deep Learning System to Convert Mathematical Documents from PDF to LaTeX}\citep{Wang:2020:DocEng}\footnote{\url{https://github.com/senyalin/PDF2LaTeX}}\footnote{\url{https://github.com/wzlxjtu/PDF2LaTeX-dataset}}
+Further, the process of sentence selection is elaborated, comparing greedy methods with ILP to optimize sentence choice based on salience scores. For slide generation, the model focuses on generating first-level bullet points from key noun phrases in selected sentences, with the aim of creating concise and informative slides.
+
+The evaluation of the model is conducted on a dataset of 1200 scientific papers and their corresponding presentation slides, using the ROUGE metric for assessing the quality of generated summaries in comparison to the original slides. The results show that the model outperforms existing baselines in terms of ROUGE scores, indicating a higher overlap with manually created slides. The dataset does not seem to have been made publicly available, but the same authors have published a larger dataset in a later paper \citep{Sefid:2021:arXiv}.
+
+In conclusion, the report underscores the effectiveness of combining feature-based and deep learning approaches for slide generation from scientific texts. It suggests that further improvements could be made by integrating visual elements into slides, which were not covered in this study. The implementation of the model is made available on GitHub for further research and development in this area.
+
+\section{DOC2PPT: Automatic Presentation Slides Generation from Scientific Documents}
+
+\citet{Fu:2022:AAAI} introduces DOC2PPT, a novel system designed to automate the creation of presentation slides from scientific documents. The system is tasked with understanding and summarizing complex documents that contain both textual and visual elements, thus requiring advanced vision-and-language processing capabilities. Traditional approaches to document summarization and cross-modal retrieval fail to address the unique challenges of slide generation, which include the need for multimodal summarization, structured output generation, and optimal visual layout design. To overcome these challenges, the authors propose a hierarchical recurrent sequence-to-sequence architecture that processes the input document at the section level and generates a structured slide deck. This architecture includes a document reader for encoding sentences and figures, a progress tracker to manage the flow of content from document sections to slides, an object placer for determining the placement of textual and visual elements on slides, and a paraphraser to convert document-style sentences into concise, slide-friendly text.
+
+The report details the creation of a new dataset comprising 5,873 pairs of scientific documents and corresponding slide decks, ref. Table \ref{table:dataset}, which were used to train and evaluate the DOC2PPT system. Several novel quantitative metrics are introduced to measure the quality of the generated slides, including Slide-Level ROUGE (ROUGE-SL) for textual content, Longest Common Figure Subsequence (LC-FS) for figure content, Text-Figure Relevance (TFR) for the relevance of text to figures, and mean Intersection over Union (mIoU) for layout quality.
+
+The experimental results demonstrate the effectiveness of the hierarchical modeling approach, with significant improvements observed across all evaluation metrics compared to baseline models. The incorporation of a paraphrasing module and a text-figure matching objective further enhances the quality of the generated slides, both in terms of textual conciseness and the relevance of figures to text. Human evaluation also confirms the superiority of the DOC2PPT system over simpler models and baseline approaches.
+
+In conclusion, the DOC2PPT system represents a significant advancement in the automatic generation of presentation slides from scientific documents, offering new opportunities for human-AI collaboration in the preparation of academic and research presentations. The large dataset introduced alongside the system, as well as the novel evaluation metrics, are expected to spur further research and development in the vision-and-language domain.
+
+\section{ArXiv Table Extractor}
+
+The project "arXiv Table Extractor" developed by \citet{Ramsay:2021:BachelorThesis} aimed at automatically extracting and parsing tables from scientific papers uploaded to arXiv. Utilizing a combination of Python, Docker, MongoDB, and various Python libraries, the team developed an automated system capable of downloading papers, extracting tables from \LaTeX{} source files, and parsing these tables into a structured JSON format. The system was designed to run as a service, potentially hosted on a server, to automate the process of table extraction and parsing, making the data easily accessible and usable for further analysis or visualization.
+
+During the Minimum Viable Product (MVP) phase, the project showed a strong ability to extract tables that did not contain multi-column or multi-row formats, achieving a high accuracy rate in those instances. However, it struggled with tables that utilized these more complex \LaTeX{} constructs, resulting in a significant portion of tables being unextracted or incorrectly parsed.
+
+Further Development 1 (FD1) addressed some of these issues, particularly improving the handling of multi-column tables. This led to a substantial increase in the success rate of table extraction, though challenges remained with very complex tables and those missing certain \LaTeX{} formatting elements like the end-of-table indicator (\textbackslash\textbackslash).
+
+Future improvements suggested include enhancing the extraction and parsing algorithm to handle a broader range of table formats, including those with multi-row formats and tables missing \LaTeX{} indicators. Additionally, the development of a user-friendly front-end interface was proposed to make the extracted data more accessible to users, suggesting a need for a backend to manage data retrieval from the database.
+
+The project demonstrates a successful application of automated document parsing to scientific literature, with significant potential for expansion and refinement. The ability to accurately extract and parse table data from a vast repository like arXiv could significantly aid in data analysis and research across various scientific fields.
+
+
+\section{Extractive Research Slide Generation Using Windowed Labeling Ranking}
+
+\citet{Sefid:2021:arXiv} introduces a method for automatically generating presentation slides from academic papers by selecting salient sentences to form bullet points. This approach aims to reduce the time and effort required to manually create slides. The primary challenge lies in accurately extracting key points from an academic paper, considering the limitations of existing methods in fully understanding sentence semantics and their interrelations. The proposed solution involves an extractive summarizer that identifies important sentences within consecutive sentence windows using neural networks. These selected sentences, along with their frequent noun phrases, are then organized in a layered format to create slide bullet points.
+
+Presentation slides typically consist of multi-level bullet points, with the majority of content found in the first and second levels. Thus, the developed system focuses on generating slides with up to two levels of bullet points. The contribution of this work is threefold: proposing a system for slide generation from high-ranking sentences, creating a corpus of 5,000 paper-slide pairs (PS5K) in computer and information science, and introducing a novel method for ranking sentences within a window, significantly improving upon existing text summarization methods.
+
+The paper also reviews related work in the area of automatic slide generation from scientific papers, highlighting differences from standard text summarization and the limitations of previous approaches. The newly proposed model was trained and evaluated on the PS5K dataset, demonstrating superior performance in identifying key content for slides. This model processes documents through steps including sentence labeling based on semantic similarity to slides, embedding sentences and documents for ranking, and selecting sentences for inclusion in slides.
+
+Experiments conducted on the PS5K dataset explored various configurations, including window sizes for sentence selection, showing that a window size of 10 yielded the best results in terms of ROUGE-1 recall. The study utilized Stanford CoreNLP for tokenization, lemmatization, and noun phrase extraction, and GloVe vectors for word embeddings. The summaries generated by the proposed method were evaluated using standard ROUGE scores, outperforming base models and highlighting the effectiveness of distributing positive labels across a paper's sections for summarization.
+
+In conclusion, this work contributes significantly to the field of automatic slide generation for scientific presentations by providing a large dataset for training and evaluation, proposing an efficient method for summarizing scientific articles, and demonstrating the importance of considering the hierarchical structure of academic papers in the summarization process.
+
+\section{Available Datasets}
+
+Only two datasets have been identified that are available online and that are suitable for training and evaluating the automatic generation of presentations from research papers. The datasets by \citet{Fu:2022:AAAI} and by \citet{Sefid:2019:K-CAP} are summarized in Table \ref{table:dataset}. The datasets are not directly applicable to the proposed task in this thesis, since the papers should be in \LaTeX{} format and the presentations should be in \LaTeX{} Beamer format. However, it may be possible to use the datasets as a basis for curating or creating a new dataset that is more suitable for the task at hand. It may also be possible to use existing conversion tools to convert the papers and presentations to the desired format.
+
+\begin{table}
+    \centering
+    \begin{tabulary}{\linewidth}{c|C|C|C|c}
+        \hline
+        \textbf{Source} & \textbf{Number of Report/Presentation Pairs} & \textbf{Reports Format} & \textbf{Presentations Format} & \textbf{Size} \\
+        \hline
+        \citet{Fu:2022:AAAI} & 5873 & PDF & JPEG & 33.8 GB \\
+        \citet{Sefid:2019:K-CAP} & 5000 & PDF & PDF & 16 GB \\
+        \hline
+    \end{tabulary}
+    \caption{The number of papers and presentations in the dataset.}
+    \label{table:dataset}
+\end{table}
