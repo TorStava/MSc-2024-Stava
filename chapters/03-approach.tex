@@ -42,6 +42,16 @@ A major contribution of this thesis is the creation of a dataset of research pap
 Some datasets are already available, as shown in chapter \ref{ch:related}, but they are not in the format we need. However, they can be used as a starting point for creating the dataset by using the presentations and mining the corresponding research papers in the required format. The arXiv archive is a good source for research papers, and the dataset can be created by mining the arXiv archive for research papers available in \LaTeX{} format. It's important to adhere to the copyrights for the scraped data if we want to publish the dataset. We also need to follow the data scraping guidelines put forth by arXiv.
 
 \subsection{Data Collection}
+Since a prerequisite for the dataset is that the research papers are in \LaTeX{} format and the presentations are in \LaTeX{} Beamer format, we need to find a source for research papers and presentations in the required formats. The arXiv archive is a good source for research papers, and part of the dataset can be created by mining the arXiv archive for research papers available in \LaTeX{} format. However, obtaining the corresponding presentations in the required format has proven challenging. Most authors don't seem to publish the corresponding presentations for their research papers. After visisting the personal websites for a selection of authors, the ratio of presentations to research papers are less than 1:10. Based on this we decided that the best approach would be to start with the presentations and mine the corresponding research papers in the required format. Also, the few presentations that are available are often in PDF or PPT format. This means that we need to convert the presentations to the required format. 
+
+We base our data collection on the conference papers from the dataset provided by \citet{Fu:2022:AAAI}. For each presentation, we mine the corresponding research paper from the arXiv archive. After downloading the source for the paper, we check if the source is in \LaTeX{} format. If it is, we add the paper and the presentation to the dataset. If the report source is not in \LaTeX{} format, we drop this pair from the dataset.
+
+In addition some papers and presentations will be manually added to the dataset. This will be done to ensure that the dataset is of high quality and to ensure that the dataset is diverse and representative of the research papers and presentations that the system will be used on.
+
+
+
+\subsection{Extracting data from PDF documents}
+Since we start out with presentaions and reports in 
 
 \subsection{Data Preprocessing}
 If we need to work with PDF formats, we must convert them to \LaTeX{} format before training our model on the dataset. 
@@ -68,6 +78,9 @@ Several tools may be able to convert PDF files into text or \LaTeX{} format:
     \item \textbf{pypdf}\footnote{\url{https://pypi.org/project/pypdf/}} - pypdf is a Python library for working with PDF files. It can be used to extract text from PDF files and convert PDF files into other formats (such as HTML).
     \item \textbf{pdfly}\footnote{\url{https://github.com/py-pdf/pdfly}} - ''CLI tool to extract (meta)data from PDF and manipulate PDF files.''
 \end{itemize}
+
+\section{Baseline}
+In order to set a baseline for the system, we use the dataset and trained models provided by \citep{Fu:2022:AAAI}. The dataset contains 5873 pairs of research papers and presentations, and the authors have published their trained models and complete dataset online. As shown in Table \ref{table:dataset} the reports are in PDF format, and the presentation slides are in JPEG format. 
 
 \section{Method}
 
