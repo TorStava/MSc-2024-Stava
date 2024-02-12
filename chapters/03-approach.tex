@@ -21,8 +21,14 @@
 
 The Automatic Generation of Presentations for Research Papers (AGPRP) generates presentations in \LaTeX{} Beamer format from academic research papers. It comprises three main components: a report parser, a presentation generator, and a presentation compiler. The report parser is responsible for extracting the relevant information from the report, the presentation generator is responsible for generating the presentation, and the presentation compiler is responsible for compiling the presentation into a \LaTeX{} Beamer file. The system is designed to be modular, so each component can be replaced with a different implementation. This allows for easy extension of the system, as well as for easy testing of different approaches.
 
-
 A two-step approach is suggested for generating the slides: first, the high-level topics are identified and used to generate slide titles, then bullet points are generated for each slide. An optional third step is to generate visual content for the slides, such as tables and illustrations.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{images/High-Level Architecture Diagram.png}
+    \caption{High-level architecture.}
+    \label{fig:high-level-architecture}
+\end{figure}
 
 %
 \subsection{NOTES (Section to be deleted)}
