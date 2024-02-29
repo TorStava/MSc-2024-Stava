@@ -43,11 +43,14 @@ A two-step approach is suggested for generating the slides: first, the high-leve
 
 \section{Dataset}
 
+The main objective of this thesis is to create a system that can automatically generate presentations in \LaTeX{} Beamer format from research papers in \LaTeX{} format.
+
 A major contribution of this thesis is the creation of a dataset of research papers and their corresponding presentations. The dataset will be used to train and evaluate the system. The dataset will be created by collecting research papers and their corresponding presentations from various sources. The dataset will be in \LaTeX{} format for the reports and in PDF/PPT format for the presentations. Ideally, the reports and the presentations should be in LaTeX format, but corresponding presentations in the wanted format have proven challenging to find in practice. 
 
 Some datasets are already available, as shown in chapter \ref{ch:related}, but they are not in the format we need. However, they can be used as a starting point for creating the dataset by using the presentations and mining the corresponding research papers in the required format. The arXiv archive is a good source for research papers, and the dataset can be created by mining the arXiv archive for research papers available in \LaTeX{} format. It's important to adhere to the copyrights for the scraped data if we want to publish the dataset. We also need to follow the data scraping guidelines put forth by arXiv.
 
-\subsection{Data Collection}
+\subsection{Data Collection Methodology}
+
 Since a prerequisite for the dataset is that the research papers are in \LaTeX{} format and the presentations are in \LaTeX{} Beamer format, we need to find a source for research papers and presentations in the required formats. The arXiv archive is a good source for research papers, and part of the dataset can be created by mining the arXiv archive for research papers available in \LaTeX{} format. However, obtaining the corresponding presentations in the required format has proven challenging. Most authors don't seem to publish the corresponding presentations for their research papers. After visisting the personal websites for a selection of authors, the ratio of presentations to research papers are less than 1:10. Based on this we decided that the best approach would be to start with the presentations and mine the corresponding research papers in the required format. Also, the few presentations that are available are often in PDF or PPT format. This means that we need to convert the presentations to the required format. 
 
 We base our data collection on the conference papers from the dataset provided by \citet{Fu:2022:AAAI}. A web scraper was created using the Python Scrapy framework\footnote{\url{https://scrapy.org/}}, that starts by searching for links to available presentations in the event archives. Then, for each presentation found, we use the Python arxiv library\footnote{\url{https://pypi.org/project/arxiv/}} to search for the corresponding research paper in the arXiv archive. If we get an exact match between the titles from both sources, we download the presentation in PDF format, and the matched paper in both PDF and source format. Note that the source files may not be guaranteed to be in \LaTeX{} format, so we need to check that before using the source files in later processing.
@@ -55,7 +58,12 @@ We base our data collection on the conference papers from the dataset provided b
 In addition some papers and presentations will be manually added to the dataset. This will be done to ensure that the dataset is of high quality and to ensure that the dataset is diverse and representative of the research papers and presentations that the system will be used on.
 
 \subsection{Extracting data from PDF documents}
-Since we start out with presentaions and reports in 
+PDF documents are challenging to extract useful, structured data from. The PDF format is designed to be a fixed-layout format, which means that the text is not stored in a structured way. This makes it difficult to extract the text from a PDF document and to extract the structure of the document. There are several tools avialable to extract text and objects form PDF documents, but much of the layout and formatting information is not present in the PDF document, and must therefore be inferred from the context of expected formatting. Some examples are:
+
+\begin{itemize}
+    \item \textbf{Title}: The title of the presentation is usually visually distinct from the rest of the text and located at the top of the slide. When extracting the text from the PDF document, we can use the position of the text to infer if it is a title, i.e. the first line of text can be assumed to be the title of the slide. This does not account for multi-line titles, or slides that do not have a title.
+    \item \textbf{Bullet points}: Visually easy to identify, but text extraction tools may not identify the bullet points, but rather just as a line of text. The authors are free to use whatever bullet point style they want, and the bullet points may be in the form of a list, or just a series of lines with a bullet point character in front of them. This makes it difficult to extract the bullet points in a structured way. 
+\end{itemize}
 
 \subsection{Data Preprocessing}
 If we need to work with PDF formats, we must convert them to \LaTeX{} format before training our model on the dataset. 
@@ -72,8 +80,9 @@ Parsing \LaTeX{} documents may be done using the TexSoup Python library\footnote
 Several tools may be able to convert PDF files into text or \LaTeX{} format: 
 
 \begin{itemize}
-    \item https://github.com/kermitt2/grobid - ''A machine learning software for extracting information from scholarly documents''
-    \item \textbf{PDFMiner}\footnote{\url{https://pypi.org/project/pdfminer/}} - PDFMiner is a tool for extracting information from PDF documents. Unlike other PDF-related tools, it focuses entirely on getting and analyzing text data. PDFMiner lets one obtain the exact text location on a page and other information, such as fonts or lines. It includes a PDF converter that can transform PDF files into other text formats (such as HTML). It has an extensible PDF parser that can be used for purposes other than text analysis.
+    \item \textbf{Pdfminer.six}\footnote{\url{https://github.com/pdfminer/pdfminer.six}} - ''Pdfminer.six is a community maintained fork of the original PDFMiner. It is a tool for extracting information from PDF documents. It focuses on getting and analyzing text data.''
+    \item \textbf{GROBID}\footnote{\url{https://github.com/kermitt2/grobid}} - ''A machine learning software for extracting information from scholarly documents''
+    \item \textbf{PDFMiner}\footnote{\url{https://pypi.org/project/pdfminer/}} - (no longer maintained, see Pdfminer.six) PDFMiner is a tool for extracting information from PDF documents. Unlike other PDF-related tools, it focuses entirely on getting and analyzing text data. PDFMiner lets one obtain the exact text location on a page and other information, such as fonts or lines. It includes a PDF converter that can transform PDF files into other text formats (such as HTML). It has an extensible PDF parser that can be used for purposes other than text analysis.
     \item \textbf{pdftolatex}\footnote{\url{https://github.com/vinaykanigicherla/pdftolatex}} - ''Python tool for generating \LaTeX{} code from PDF files.''
     \item \textbf{pdf2latex-converter}\footnote{\url{https://github.com/mcpeixoto/pdf2latex-converter}} - ''Originally based on \textbf{pdftolatex}.'' (Work in progress).
     \item \textbf{pdf2latex}\footnote{\url{https://github.com/emsquid/pdf2latex}} - ''pdf2latex is a CLI tool to convert a PDF back to LaTeX.''
@@ -99,6 +108,9 @@ Presentations can be generated in various layouts, content, and style variations
 There are several options for generating visual layout and content for the presentation slides. 
 
 To keep things simple, we propose three simple slide layouts: A title slide, a bullet point slide, and a visual slide. The title slide will contain the title, the bullet point slide will contain a list of bullet points, and the visual slide will represent the information in the report.
+
+\section{Evaluation}
+The system will be evaluated on how well it can extract the relevant information from the report and how well it can summarize it in a presentation. The evaluation will be done by comparing the generated presentations with the original presentations. The evaluation will be done using various metrics, such as BLEU, ROUGE, and METEOR. The system will also be evaluated on how well it can identify the visual content for the slides, such as tables and illustrations.
 
 % \instructions{
 % \begin{itemize}
