@@ -1,0 +1,95 @@
+\chapter{Beamer Templates}
+
+\section{Template}
+This is the general template used for creating presentations in \LaTeX{} using the Beamer package. The template is purposely kept simple to allow for easy customization. The following is a basic example of a Beamer presentation template
+
+\begin{verbatim}
+\documentclass{beamer}
+
+% Theme selection
+\usetheme{default} % This is just an example; feel free to change the theme
+
+\title[Short Title]{Full Presentation Title Here}
+\author{Author Name}
+\institute[Author Institution]{Department of Applied Data Science \\ Author Institution \\ \textit{author.email@domain.com}}
+\date{\today}
+
+\begin{document}
+
+% Title Slide
+\begin{frame}
+    \titlepage
+\end{frame}
+
+% Table of Contents
+\begin{frame}
+    \frametitle{Agenda}
+    \tableofcontents
+\end{frame}
+
+% Introduction to the topic
+\section{Introduction}
+\begin{frame}{Introduction}
+    \framesubtitle{The significance of NLP and Information Retrieval}
+    Natural Language Processing (NLP) and Information Retrieval (IR) are key areas in the field of Applied Data Science, focusing on the extraction of meaningful information from text and the efficient retrieval of information resources.
+\end{frame}
+
+% Section Introduction Example
+\section{Key Concepts in NLP}
+\begin{frame}{Key Concepts in NLP}
+    This section covers foundational concepts critical to understanding NLP.
+\end{frame}
+
+% Content Slide with Bullet Points
+\begin{frame}{Key Concepts in NLP}
+    \begin{itemize}
+    \item Syntax and Semantics
+    \item Machine Translation
+    \item Sentiment Analysis
+    \item Named Entity Recognition
+    \end{itemize}
+\end{frame}
+
+% Two-Column Slide: Text and Image
+\section{Two-Column Slide: Text and Image}
+\begin{frame}{Two-Column Slide: Text and Image}
+    \begin{columns}[T] % The [T] option aligns column content at the top
+    % Left Column
+    \begin{column}{.5\textwidth}
+        \begin{figure}
+        \includegraphics[width=\textwidth]{placeholder-image.png} % Adjust path to your image
+        \caption{Descriptive caption of the image.}
+        \end{figure}
+    \end{column}
+    % Right Column
+    \begin{column}{.5\textwidth}
+        \textbf{Key Points:}
+        \begin{itemize}
+        \item First key point or item.
+        \item Second key point or item.
+        \item Additional points or details.
+        \end{itemize}
+    \end{column}
+    \end{columns}
+\end{frame}
+
+% Conclusion Slide
+\section{Conclusion}
+\begin{frame}{Conclusion}
+    \begin{itemize}
+    \item Highlight the integration of NLP techniques in enhancing Information Retrieval systems.
+    \item Discuss the implications of your findings for the field of Applied Data Science.
+    \end{itemize}
+\end{frame}
+
+% Ending Slide
+\begin{frame}{Thank You!}
+    Thank you for your attention.\\
+    Any questions?
+\end{frame}
+
+\end{document}        
+\end{verbatim}
+
+\section{Example}
+\includepdf[offset=-25mm -25mm, pages=-, frame, nup=2x4, scale=0.97]{./images/slidepack-main.pdf}
