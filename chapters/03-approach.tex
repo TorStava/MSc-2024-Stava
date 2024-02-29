@@ -96,6 +96,43 @@ Several tools may be able to convert PDF files into text or \LaTeX{} format:
 In order to set a baseline for the system, we use the dataset and trained models provided by \citep{Fu:2022:AAAI}. The dataset contains 5873 pairs of research papers and presentations, and the authors have published their trained models and complete dataset online. As shown in Table \ref{table:dataset} the reports are in PDF format, and the presentation slides are in JPEG format. 
 
 \section{Method}
+The outline of the method is as follows:
+
+1. Parse the \LaTeX{} report and extract the relevant information.
+    - Use tool like TexSoup or pylatex to parse the \LaTeX{} document.
+    - Extract metadata such as title, authors, and abstract.
+    - Extract the main sections and subsections of the report.
+    - Extract the text from the report.
+    - Extract the tables and illustrations from the report.
+    (Consider if this should be a "simple" structure/class or if it could be useful to use a knowledge graph to represent the information in the report.)
+
+2. Identify main topics / sections in the report.
+    - Use the extracted sections and subsections to identify the main topics.
+    - If using a knowledge graph, consider if it could be used to identify the main topics.
+
+3. Summarize each section and generate bullet points.
+    - Use a summarization model to summarize the text from each section.
+    - Generate bullet points from the summarized text.
+
+3.5. (optional) Generate speaking notes
+
+4. Identify relevant visual content, such as tables and illustrations.
+    - Use a model to identify the relevant visual content for the slides.
+    
+4.5. (optional) Generate visual content for the slides.
+    - Use a model to generate visual content for the slides.
+
+5. Split the bullet points and visual content into slides.
+    - Use the bullet points and visual content to generate the slides.
+
+6. Generate the presentation in \LaTeX{} Beamer format.
+    - Select appropriate templates for the slides.
+    - Use a template to generate the presentation in \LaTeX{} Beamer format.
+    - Compile the presentation into a PDF file (?)
+
+\section{Limitations}
+In order to limit the scope of this project and to make it feasible to complete within the given time frame, we have made the following limitations:
+1. 
 
 \subsection{Report Parser (RP)}
 The \emph{Report Parser (RP)} is responsible for extracting the relevant information from the report. The report parser comprises two main components: the \emph{Report Content Extractor (RCE)} and the \emph{Report Content Summarizer (RCS)}. The \emph{Report Content Extractor} is responsible for extracting the relevant information from the report, while the \emph{Report Content Summarizer} summarizes the extracted information.
