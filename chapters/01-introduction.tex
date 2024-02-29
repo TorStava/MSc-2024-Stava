@@ -17,8 +17,13 @@
 % \end{itemize}
 % }
 
-The process of creating a presentation from a research paper can be a time-consuming and tedious task. The goal of this project is to automate this process by creating a system that can automatically generate presentations from research papers.
+Transforming research findings into presentations is a crucial but challenging task in today's academic and professional settings. This process involves turning detailed research papers into clear, engaging presentations suitable for various audiences, from conference attendees to students. It requires significant time, deep subject understanding, and skills in information design and storytelling.
 
+The aim to automate this process by developing a system that can generate presentations from academic papers seeks to improve efficiency and bridge the gap between detailed research and audience-friendly presentations. Such a system would reduce the time and cognitive effort researchers and professionals must invest in creating presentations, allowing them to concentrate on their primary work and ensuring their findings reach a wider audience.
+
+Achieving this automation faces several hurdles. The system must accurately interpret academic language, which is often complex and filled with specific terminology and data. It needs to identify key points in a paper, understand the importance of different findings, and translate this information into visually appealing slides. Moreover, it must adapt to the varying conventions of different research fields, which have their own ways of presenting and arguing findings.
+
+Addressing these challenges requires advancements in natural language processing, information retrieval, and the use of machine learning, graph databases, and vector databases. These technologies can help process and visually represent the complex content of academic papers. Developing such a system would significantly advance the automation of knowledge dissemination, benefiting academics and professionals by making it easier to convert research papers into presentations and thereby increasing the accessibility and impact of their work.
 
 \section{Objectives}
 \label{sec:intro:objectives}
@@ -30,14 +35,19 @@ The process of creating a presentation from a research paper can be a time-consu
 % \end{itemize}
 % }
 
-The main objective of this thesis is to create a system that can automatically generate presentations from research papers. In detail, the research papers will be in \LaTeX{} format, and the presentations will be in \LaTeX{} Beamer format. In order to achieve this objective, the following research questions will be addressed:
+The primary goal of this thesis is to develop an innovative system capable of automatically generating presentations from academic research papers. Specifically, the system will transform research papers formatted in \LaTeX{} into presentations crafted in the \LaTeX{} Beamer format. This endeavor is motivated by the need to streamline the process of knowledge dissemination, making it more efficient and accessible. To realize this goal, the thesis will explore several pivotal research questions, each designed to tackle a distinct aspect of the system's development process:
 
 \begin{itemize}
-  \item RQ1: Can we generate a dataset of research papers and their presentation in the required \LaTeX{} and Beamer formats?
-  \item RQ2: Can we provide a method for extracting the relevant information from a research paper?
-  \item RQ3: Can we provide a method for summarizing the extracted information?
-  \item RQ4: Can we provide a method for generating a coherent and high-quality presentation from the summarized information?
+  \item \textbf{RQ1: Dataset Generation} – The first question examines the feasibility of compiling a comprehensive dataset of research papers alongside their corresponding presentations, both formatted according to the \LaTeX{} and Beamer specifications. This inquiry is foundational, as it addresses the availability of source material necessary for training and testing the proposed system. It will involve identifying sources for such documents, methods for dataset curation, and strategies for ensuring the dataset's diversity and representativeness.
+  
+  \item \textbf{RQ2: Information Extraction} – The second question delves into the methodologies for accurately extracting pertinent information from research papers. This involves developing or leveraging existing natural language processing techniques to identify and isolate key points, findings, and data within the complex structure of academic papers. The challenge here is twofold: accurately discerning the content's significance amidst the academic jargon and structurally diverse formats of research papers.
+  
+  \item \textbf{RQ3: Information Summarization} – Building on the previous question, this inquiry focuses on the summarization of extracted information into a condensed form that retains the original content's essence. This summarization process is crucial for distilling the research paper's core messages and findings into a format suitable for presentation slides. The research will explore algorithms and techniques for effective summarization, ensuring that the most critical information is highlighted while maintaining the research context and integrity.
+  
+  \item \textbf{RQ4: Presentation Generation} – The final question aims to develop a methodology for translating summarized information into coherent and high-quality presentations. This encompasses not only the textual content but also the design and aesthetic aspects of the slides. The challenge is to automate the creation of presentations that are not only informative but also visually appealing and engaging for the audience. This will involve leveraging principles of design, information hierarchy, and possibly user-customizable templates to produce presentations that effectively communicate the research findings.
 \end{itemize}
+
+Addressing these research questions will not only contribute to the academic field by providing a novel tool for researchers and educators but also push the boundaries of what is currently achievable in the domain of automatic document processing and presentation generation. Through rigorous investigation and development, this thesis aims to offer a comprehensive solution to the time-consuming process of presentation creation, thereby enhancing the accessibility and dissemination of scientific knowledge.
 
 \section{Approach and Contributions}
 \label{sec:intro:approach}
@@ -49,7 +59,15 @@ The main objective of this thesis is to create a system that can automatically g
 % \end{itemize}
 % }
 
-Creating a presentation from a research paper can be viewed as either a summarization task an extractive task, or a combination of both. We propose a novel method, REP2BEAM, of generating presentation slides in LaTeX Beamer format from research papers in LaTeX format. The system will extract the relevant information from the research paper and then summarize it in a presentation. The system will be evaluated on how well it can extract the relevant information from the paper and how well it can summarize it in a presentation.
+The endeavor of transforming a research paper into a presentation encompasses a multifaceted process that may involve summarization, extraction of key elements, or a hybrid approach integrating both methodologies. This thesis introduces a pioneering system, named TEX2BEAM, designed to automate the creation of presentation slides in \LaTeX{} Beamer format directly from research papers formatted in \LaTeX{}. The essence of TEX2BEAM lies in its ability to intelligently navigate through the dense academic text of a research paper, identify and extract pertinent information, and subsequently distill this information into a concise, presentation-ready format.
+
+The operational framework of TEX2BEAM is predicated on a series of sophisticated algorithms and methodologies tailored to understand the complex structure and content of academic papers. Initially, the system employs natural language processing (NLP) techniques to parse the text, recognizing and categorizing different sections such as the abstract, introduction, methodology, results, and conclusion. This step is crucial for identifying the segments of text that are most likely to contain key insights and findings relevant to a summarized presentation.
+
+Following the identification process, TEX2BEAM applies a combination of extractive and abstractive summarization techniques. In the extractive phase, the system selects verbatim snippets from the text that represent the core ideas and findings. Conversely, the abstractive phase involves rephrasing and condensing these ideas into more succinct statements, tailored for slide-based presentation. This dual approach ensures that the generated presentation captures the essence of the research paper while being accessible and engaging for the audience.
+
+A critical component of the TEX2BEAM system is its algorithm for organizing the summarized content into a coherent and aesthetically pleasing presentation. This involves determining the optimal sequence of slides, selecting or generating appropriate visual aids (such as figures, tables, and charts), and applying principles of design to enhance readability and viewer engagement.
+
+The efficacy and efficiency of TEX2BEAM will be rigorously evaluated through a series of tests designed to assess its proficiency in accurately extracting relevant information from research papers and its capability to synthesize this information into effective presentations. Metrics for evaluation will include the accuracy of information extraction, the clarity and conciseness of the summarization, and the overall quality and coherence of the generated presentations. Through this comprehensive evaluation, the thesis aims to demonstrate the potential of TEX2BEAM as a valuable tool for academics and professionals, streamlining the process of presentation creation and facilitating the dissemination of research findings.
 
 
 \section{Outline}
@@ -62,4 +80,14 @@ Creating a presentation from a research paper can be viewed as either a summariz
 % \end{itemize}
 % }
 
-The rest of this thesis is structured as follows. Chapter~\ref{ch:related} discusses relevant work related to the tasks of summarizing, extracting, and generating presentations based on documents and reports. Chapter~\ref{ch:approach} describes in detail the approach developed in this thesis in order to create the Automatic Generation of Presentations for Research Papers (\textbf{AGPRP})/\textbf{REP2BEAM} system (naming to be decided). Chapter~\ref{ch:eval} evaluates the results of the AGPRP system by looking at various metrics. Chapter~\ref{ch:conclusion} wraps up and concludes the thesis.
+The thesis is meticulously organized to provide a clear and comprehensive narrative of the research conducted, from the examination of related work to the concluding reflections on the findings and future directions. Each chapter is carefully crafted to build upon the previous ones, guiding the reader through the journey of developing the TEX2BEAM system, an innovative solution for the automatic generation of presentations from research papers.
+
+\textbf{Chapter 2} explores some of latest existing body of work relevant to the core objectives of this thesis. It delves into the methodologies and technologies underpinning the summarization of texts, the extraction of key information, and the generation of presentations from dense academic documents and reports. This chapter situates the current research within the broader academic discourse, highlighting the advancements in the field and identifying the gaps that the TEX2BEAM system aims to address.
+
+\textbf{Chapter 3} provides an exhaustive description of the methodology and technical framework developed to bring the TEX2BEAM system to fruition. It outlines the architectural design, algorithms, and computational strategies employed to process research papers in \LaTeX{} format and transform them into informative and visually appealing presentations in \LaTeX{} Beamer format. Special attention is given to the novel aspects of the approach, including the system's ability to intelligently parse academic language, identify significant content, and effectively summarize and visually represent this information in a presentation-ready format.
+
+\textbf{Chapter 4} is dedicated to the evaluation of the TEX2BEAM system, presenting a thorough analysis of its performance across various metrics. This chapter assesses the accuracy of information extraction, the effectiveness of content summarization, and the overall quality and coherence of the generated presentations. The evaluation process includes both quantitative measures and qualitative feedback, offering a well-rounded understanding of the system's capabilities, limitations, and potential impact on the field.
+
+\textbf{Chapter 5} concludes the thesis by summarizing the key insights gained and contributions made through the research. It reflects on the significance of automating the process of presentation generation from research papers and discusses the implications for academic and professional dissemination of knowledge. Additionally, this chapter outlines future research opportunities, suggesting ways in which the TEX2BEAM system could be further refined, expanded, or applied to new domains.
+
+Through this structured presentation, the thesis not only articulates the development and validation of the TEX2BEAM system but also contributes to the ongoing dialogue in the fields of natural language processing, information retrieval, and computational linguistics, paving the way for future innovations in the automatic generation of academic presentations.
