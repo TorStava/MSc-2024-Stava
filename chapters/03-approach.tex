@@ -19,9 +19,9 @@
 % Name these themes based on the different components or sub-problems you are solving in your thesis.
 % }
 
-The Automatic Generation of Presentations for Research Papers (AGPRP) generates presentations in \LaTeX{} Beamer format from academic research papers. It comprises three main components: a report parser, a presentation generator, and a presentation compiler. The report parser is responsible for extracting the relevant information from the report, the presentation generator is responsible for generating the presentation, and the presentation compiler is responsible for compiling the presentation into a \LaTeX{} Beamer file. The system is designed to be modular, so each component can be replaced with a different implementation. This allows for easy extension of the system, as well as for easy testing of different approaches.
+The TEX2BEAM system is capable of generating LaTeX Beamer format presentations from academic research papers. It consists of three primary components: a report parser, a presentation generator, and a presentation compiler. The report parser extracts the essential information from the report, the presentation generator creates the presentation, and the presentation compiler assembles the presentation into a LaTeX Beamer file. The system is designed to be modular, allowing each component to be replaced with a different implementation. This feature enables easy expansion of the system, as well as convenient testing of various approaches.
 
-A two-step approach is suggested for generating the slides: first, the high-level topics are identified and used to generate slide titles, then bullet points are generated for each slide. An optional third step is to generate visual content for the slides, such as tables and illustrations.
+To generate slides, a suggested two-step approach is: first, identify high-level topics and generate slide titles, and second, generate bullet points for each slide. If needed, a third step can be taken to create visual content like tables and illustrations for the slides.
 
 \begin{figure}
     \centering
@@ -42,34 +42,46 @@ A two-step approach is suggested for generating the slides: first, the high-leve
 \end{itemize}
 
 \section{Dataset}
+This thesis aims to automate the creation of LaTeX Beamer presentations from LaTeX research papers.
 
-The main objective of this thesis is to create a system that can automatically generate presentations in \LaTeX{} Beamer format from research papers in \LaTeX{} format.
+One of the key contributions of this thesis is the development of a dataset that will be used to train and evaluate the system. The dataset will be created by collecting research papers and their corresponding presentations from various sources. While it is ideal to have both the reports and presentations in LaTeX format, finding them in the required format in practice has been challenging. As a result, the dataset will contain reports in LaTeX format and presentations in PDF format.
 
-A major contribution of this thesis is the creation of a dataset of research papers and their corresponding presentations. The dataset will be used to train and evaluate the system. The dataset will be created by collecting research papers and their corresponding presentations from various sources. The dataset will be in \LaTeX{} format for the reports and in PDF/PPT format for the presentations. Ideally, the reports and the presentations should be in LaTeX format, but corresponding presentations in the wanted format have proven challenging to find in practice. 
-
-Some datasets are already available, as shown in chapter \ref{ch:related}, but they are not in the format we need. However, they can be used as a starting point for creating the dataset by using the presentations and mining the corresponding research papers in the required format. The arXiv archive is a good source for research papers, and the dataset can be created by mining the arXiv archive for research papers available in \LaTeX{} format. It's important to adhere to the copyrights for the scraped data if we want to publish the dataset. We also need to follow the data scraping guidelines put forth by arXiv.
+Although some datasets are available, they are not formatted as we need. However, they can be used to create the dataset by utilizing the presentations and extracting the corresponding research papers in the required format. To obtain research papers in the required format, we can mine the arXiv archive since it is a trustworthy source for such papers. If we plan to publish the dataset, adhering to copyright laws for the scraped data is crucial. Additionally, we must follow the data scraping guidelines provided by arXiv.
 
 \subsection{Data Collection Methodology}
+We must find sources that fulfill the prerequisite to create a dataset of research papers and presentations in LaTeX format. The arXiv archive is a suitable source for research papers in LaTeX format. However, obtaining corresponding presentations in LaTeX Beamer format has been challenging. Most authors do not publish presentations for their research papers. After visiting the personal websites of several authors, we found that the ratio of presentations to research papers was less than 1:10. Therefore, we decided to start with the presentations and mine corresponding research papers in the required format. Additionally, the few available presentations are often in PDF or PPT format, which must be converted to the required format. 
 
-Since a prerequisite for the dataset is that the research papers are in \LaTeX{} format and the presentations are in \LaTeX{} Beamer format, we need to find a source for research papers and presentations in the required formats. The arXiv archive is a good source for research papers, and part of the dataset can be created by mining the arXiv archive for research papers available in \LaTeX{} format. However, obtaining the corresponding presentations in the required format has proven challenging. Most authors don't seem to publish the corresponding presentations for their research papers. After visisting the personal websites for a selection of authors, the ratio of presentations to research papers are less than 1:10. Based on this we decided that the best approach would be to start with the presentations and mine the corresponding research papers in the required format. Also, the few presentations that are available are often in PDF or PPT format. This means that we need to convert the presentations to the required format. 
+Our data collection process is based on the conference papers from the dataset provided by Fu:2022:AAAI. We created a web scraper using the Python Scrapy framework to automate this process. The scraper starts by searching for links to presentations in the event archives. We use the Python arXiv library for each presentation found to search for the corresponding research paper in the arXiv archive. If we find an exact match between the titles from both sources, we download the presentation in PDF format and the matched paper in both PDF and source format. However, we need to check the source files because they may not be guaranteed to be in LaTeX format before using them in later processing.
 
-We base our data collection on the conference papers from the dataset provided by \citet{Fu:2022:AAAI}. A web scraper was created using the Python Scrapy framework\footnote{\url{https://scrapy.org/}}, that starts by searching for links to available presentations in the event archives. Then, for each presentation found, we use the Python arxiv library\footnote{\url{https://pypi.org/project/arxiv/}} to search for the corresponding research paper in the arXiv archive. If we get an exact match between the titles from both sources, we download the presentation in PDF format, and the matched paper in both PDF and source format. Note that the source files may not be guaranteed to be in \LaTeX{} format, so we need to check that before using the source files in later processing.
-
-In addition some papers and presentations will be manually added to the dataset. This will be done to ensure that the dataset is of high quality and to ensure that the dataset is diverse and representative of the research papers and presentations that the system will be used on.
+We will manually add some papers and presentations to the dataset to ensure that the dataset is of high quality and representative of the research papers and presentations that the system will be used on. This will also help ensure the dataset is diverse enough to meet the system's requirements.
 
 \subsection{Extracting data from PDF documents}
-PDF documents are challenging to extract useful, structured data from. The PDF format is designed to be a fixed-layout format, which means that the text is not stored in a structured way. This makes it difficult to extract the text from a PDF document and to extract the structure of the document. There are several tools avialable to extract text and objects form PDF documents, but much of the layout and formatting information is not present in the PDF document, and must therefore be inferred from the context of expected formatting. Some examples are:
+We need to convert the PDF presentations into a suitable format to create a training dataset that can be used to train and optimize a model for generating LaTeX Beamer presentations. However, extracting useful, structured data from PDF documents can be difficult because they are designed in a fixed-layout format. This means that the text is not stored in a structured way, making it challenging to extract both the text and the document's structure. 
+
+We have not been able to identify any tool that's able to produce the output we require to generate the dataset.  Text and images can be extracted using tools like pdfminer.six or PyMuPDF, but we need to add metadata in order to identify the type of text, like headings, bullets, body text, etc. Other tools aim to convert the PDF into other formats like PPT and DOCX by preserving content and layout, but this is still only for visual representation, and not adding our required metdata.
+
+While there are tools available to extract text and objects from PDF documents, much of the PDF document's layout and formatting information is not available. Therefore, it must be inferred from the context of expected formatting. 
+
+Some examples of expected formatting are:
 
 \begin{itemize}
-    \item \textbf{Title}: The title of the presentation is usually visually distinct from the rest of the text and located at the top of the slide. When extracting the text from the PDF document, we can use the position of the text to infer if it is a title, i.e. the first line of text can be assumed to be the title of the slide. This does not account for multi-line titles, or slides that do not have a title.
-    \item \textbf{Bullet points}: Visually easy to identify, but text extraction tools may not identify the bullet points, but rather just as a line of text. The authors are free to use whatever bullet point style they want, and the bullet points may be in the form of a list, or just a series of lines with a bullet point character in front of them. This makes it difficult to extract the bullet points in a structured way. 
+    \item \textbf{Title}: The title of a presentation is usually placed at the top of the slide and is visually distinct from the rest of the text. When we extract text from a PDF document, we can determine if the first line of text is the slide's title by its position. However, this method may not work for slides with multi-line titles or no titles.
+    \item \textbf{Bullet points}: Bullet points are easily identifiable visually, but text extraction tools may not recognize them. The reason is that authors are free to use any bullet point style they prefer, whether in the form of a list or a series of lines with a bullet point character at the start. This makes it challenging to extract bullet points in a structured way. 
+    \item \textbf{Image and table captions}: This text should be linked to their respective image or table, and not considered as stand-alone text.
 \end{itemize}
 
-\subsection{Data Preprocessing}
-If we need to work with PDF formats, we must convert them to \LaTeX{} format before training our model on the dataset. 
+Several methods for converting the PDF presentations into a usable dataset have been considered:
+
+\begin{itemize}
+    \item Manually recreate the presentations in Beamer format
+    \item Existing tools, like pdf2latex or pdf2docx
+    \item Bespoke machine learning model, created and trained from scratch
+    \item Fine-tune transformer model, e.g. BERT or T5 from Huggingface
+    \item LLM, e.g .chatGPT, possibly fine-tune if required
+\end{itemize}
 
 \subsection{Data Augmentation}
-Enriching the dataset with details such as internal and external references, tables, and illustrations may be useful. This can help generate the presentation, as it can be used to determine which additional items to include together with the text.
+Enriching the dataset with details such as internal and external references, tables, and illustrations may be helpful. This can help generate the presentation, as it can be used to determine which additional items to include together with the text.
 
 \section{Tools}
 
@@ -90,6 +102,7 @@ Several tools may be able to convert PDF files into text or \LaTeX{} format:
     \item \textbf{PDF2LaTeX}\footnote{\url{https://github.com/senyalin/PDF2LaTeX}} - PDF2LaTeX is a tool for converting PDF files into \LaTeX{} format. It is a command-line tool that can convert PDF files into \LaTeX{} format. It is written in Python and uses the PyPDF2 library to parse PDF files. It can be used to convert PDF files into \LaTeX{} format.
     \item \textbf{pypdf}\footnote{\url{https://pypi.org/project/pypdf/}} - pypdf is a Python library for working with PDF files. It can be used to extract text from PDF files and convert PDF files into other formats (such as HTML).
     \item \textbf{pdfly}\footnote{\url{https://github.com/py-pdf/pdfly}} - ''CLI tool to extract (meta)data from PDF and manipulate PDF files.''
+    \item PyMuPDF
 \end{itemize}
 
 \section{Baseline}
