@@ -67,17 +67,18 @@ Some examples of expected formatting are:
 \begin{itemize}
     \item \textbf{Title}: The title of a presentation is usually placed at the top of the slide and is visually distinct from the rest of the text. When we extract text from a PDF document, we can determine if the first line of text is the slide's title by its position. However, this method may not work for slides with multi-line titles or no titles.
     \item \textbf{Bullet points}: Bullet points are easily identifiable visually, but text extraction tools may not recognize them. The reason is that authors are free to use any bullet point style they prefer, whether in the form of a list or a series of lines with a bullet point character at the start. This makes it challenging to extract bullet points in a structured way. 
+    \item \textbf{Tables}: The text is organized in a cell or grid structure, with optional headings and row names. Pure text extraction will leave out important formatting details, and may even break the content order. 
     \item \textbf{Image and table captions}: This text should be linked to their respective image or table, and not considered as stand-alone text.
 \end{itemize}
 
 Several methods for converting the PDF presentations into a usable dataset have been considered:
 
 \begin{itemize}
-    \item Manually recreate the presentations in Beamer format
-    \item Existing tools, like pdf2latex or pdf2docx
-    \item Bespoke machine learning model, created and trained from scratch
-    \item Fine-tune transformer model, e.g. BERT or T5 from Huggingface
-    \item LLM, e.g .chatGPT, possibly fine-tune if required
+    \item \textbf{Manually recreate the presentations in Beamer format}: Although this is an option that could create high-quality output, it will also be a very time-consuming endeavor. Since we want to have as large a dataset as possible, we don't consider this a practical alternative.
+    \item \textbf{Existing tools, like pdf2latex or pdf2docx}: These tools can extract much of the content, but since they are not able to extract required metadata, additional work will be required.
+    \item \textbf{Bespoke machine learning model, created and trained from scratch}: This has been demonstrated in previous works, and would be a potential way forward. However, this would require a large amount of training data, as well as huge computing resources and time to train the model. A few years ago this would most likely have been the best potential method. However, with the availability of pre-trained models and large language models (LLM's), these other options will likely be better than what we can produce on out own.
+    \item \textbf{Fine-tune transformer model, e.g. BERT or T5 from Huggingface}: Pre-trained transformer models for a large amount of various NLP tasks are publicly available for download, use, and fine-tuning from websites like Huggingface. These models are often trained on large datasets utilizing large compute resources and large amounts of time. Depending on the model, they may do a good job out of the box, while improvements can potentially be made by fine-tuning the model on our own dataset.
+    \item \textbf{LLM, e.g .chatGPT, possibly fine-tune if required}: Some of the largest LLM's today are provided by big-tech 
 \end{itemize}
 
 \subsection{Data Augmentation}
